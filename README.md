@@ -58,11 +58,6 @@ set CONFIG_PATH=config/local.yaml
 go run cmd/students-api/main.go
 ```
 
-### Endpoints
-
-Currently, the only available endpoint is:
-
-- `GET /` — returns a welcome message.
 
 > **Note:** Any other route will return a 404 Not Found.
 
@@ -74,5 +69,3 @@ Key dependencies (see `go.mod` for full list):
 - [gopkg.in/yaml.v3](https://gopkg.in/yaml.v3) for YAML parsing
 
 ---
-
-_No sensitive or private information is included in this README._
