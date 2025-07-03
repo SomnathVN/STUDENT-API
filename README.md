@@ -58,6 +58,7 @@ set CONFIG_PATH=config/local.yaml
 go run cmd/students-api/main.go
 ```
 
+<<<<<<< HEAD
 ### Endpoints
 
 Currently, the only available endpoint is:
@@ -66,6 +67,8 @@ Currently, the only available endpoint is:
 - `GET /` — returns student by id and list of student.
 - `UPDATE /` - updates student in students table at given id.
 - `DELETE /` - deletes student in students table at given id. 
+=======
+>>>>>>> b88813d13ecf4d7dff5583ab2ebab861910b7f4f
 
 > **Note:** Any other route will return a 404 Not Found.
 
@@ -77,5 +80,3 @@ Key dependencies (see `go.mod` for full list):
 - [gopkg.in/yaml.v3](https://gopkg.in/yaml.v3) for YAML parsing
 
 ---
-
-_No sensitive or private information is included in this README._
