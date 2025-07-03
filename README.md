@@ -62,7 +62,10 @@ go run cmd/students-api/main.go
 
 Currently, the only available endpoint is:
 
-- `GET /` — returns a welcome message.
+- `POST /` - creates student in students table.
+- `GET /` — returns student by id and list of student.
+- `UPDATE /` - updates student in students table at given id.
+- `DELETE /` - deletes student in students table at given id. 
 
 > **Note:** Any other route will return a 404 Not Found.
 
