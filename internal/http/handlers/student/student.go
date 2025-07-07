@@ -7,7 +7,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-	"strconv"
+	//"strconv"
 
 	"github.com/SomnathVN/students-api/internal/storage"
 	"github.com/SomnathVN/students-api/internal/types"
@@ -55,7 +55,8 @@ func New(storage storage.Storage) http.HandlerFunc {
 			return
 		}
 
-		response.WriteJson(w, http.StatusCreated, map[string]int64{"id": lastId})
+		//response.WriteJson(w, http.StatusCreated, map[string]int64{"id": lastId})
+		response.WriteJson(w, http.StatusCreated, map[string]string{"id": lastId})
 	}
 }
 
@@ -64,13 +65,15 @@ func GetById(storage storage.Storage) http.HandlerFunc {
 		id := r.PathValue("id")
 		slog.Info("geting a student", slog.String("id", id))
 
-		intId, err := strconv.ParseInt(id, 10, 64)
-		if err != nil {
-			response.WriteJson(w, http.StatusBadRequest, response.GeneralError(err))
-			return
-		}
+		stringId := id
+		//intId, err := strconv.ParseInt(id, 10, 64)
+		// if err != nil {
+		// 	response.WriteJson(w, http.StatusBadRequest, response.GeneralError(err))
+		// 	return
+		// }
 
-		student, err := storage.GetStudentById(intId)
+		//student, err := storage.GetStudentById(intId)
+		student, err := storage.GetStudentById(stringId)
 		if err != nil {
 			slog.Error("error getting user", slog.String("id", id))
 			response.WriteJson(w, http.StatusInternalServerError, response.GeneralError(err))
@@ -102,14 +105,15 @@ func Update(storage storage.Storage) http.HandlerFunc {
 		id := r.PathValue("id")
 		slog.Info("updating a student", slog.String("id", id))
 
-		intId, err := strconv.ParseInt(id, 10, 64)
-		if err != nil {
-			response.WriteJson(w, http.StatusBadRequest, response.GeneralError(err))
-			return
-		}
+		//intId, err := strconv.ParseInt(id, 10, 64)
+		stringId := id
+		// if err != nil {
+		// 	response.WriteJson(w, http.StatusBadRequest, response.GeneralError(err))
+		// 	return
+		// }
 
 		var student types.Student
-		err = json.NewDecoder(r.Body).Decode(&student)
+		err := json.NewDecoder(r.Body).Decode(&student)
 		if errors.Is(err, io.EOF) {
 			response.WriteJson(w, http.StatusBadRequest, response.GeneralError(fmt.Errorf("empty body")))
 			return
@@ -125,7 +129,8 @@ func Update(storage storage.Storage) http.HandlerFunc {
 			return
 		}
 
-		student, err = storage.UpdateStudent(intId, student.Name, student.Email, student.Age)
+		// student, err = storage.UpdateStudent(intId, student.Name, student.Email, student.Age)
+		student, err = storage.UpdateStudent(stringId, student.Name, student.Email, student.Age)
 		if err != nil {
 			response.WriteJson(w, http.StatusInternalServerError, response.GeneralError(err))
 			return
@@ -140,13 +145,19 @@ func Delete(storage storage.Storage) http.HandlerFunc {
 		id := r.PathValue("id")
 		slog.Info("deleting a student", slog.String("id", id))
 
-		intId, err := strconv.ParseInt(id, 10, 64)
-		if err != nil {
-			response.WriteJson(w, http.StatusBadRequest, response.GeneralError(err))
-			return
-		}
+		// intId, err := strconv.ParseInt(id, 10, 64)
+		// if err != nil {
+		// 	response.WriteJson(w, http.StatusBadRequest, response.GeneralError(err))
+		// 	return
+		// }
+		stringId := id
 
-		err = storage.DeleteStudent(intId)
+		// err = storage.DeleteStudent(intId)
+		// if err != nil {
+		// 	response.WriteJson(w, http.StatusInternalServerError, response.GeneralError(err))
+		// 	return
+		// }
+		err := storage.DeleteStudent(stringId)
 		if err != nil {
 			response.WriteJson(w, http.StatusInternalServerError, response.GeneralError(err))
 			return

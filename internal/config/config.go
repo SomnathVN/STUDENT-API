@@ -13,9 +13,16 @@ type HTTPServer struct{
 } 
 
 //env-default:"production"
+// type Config struct{
+// 	Env 		string `yaml:"env" env:"ENV" env-required:"true"`
+// 	StoragePath string `yaml:"storage_path" env-required:"true"`
+// 	HTTPServer	`yaml:"http_server"`
+// }
 type Config struct{
 	Env 		string `yaml:"env" env:"ENV" env-required:"true"`
 	StoragePath string `yaml:"storage_path" env-required:"true"`
+	ProjectId	string`yaml:"project_id"`
+	APIKey    string `yaml:"api_key" env-required:"true"`
 	HTTPServer	`yaml:"http_server"`
 }
 

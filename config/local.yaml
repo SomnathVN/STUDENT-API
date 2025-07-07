@@ -1,4 +1,6 @@
 env: "dev"
 storage_path: "storage/storage.db"
+project_id: "student-api-413b8"
+api_key: "my-secret-api-key-12345"
 http_server:
   address: "localhost:8082"
